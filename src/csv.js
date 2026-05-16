@@ -1,7 +1,11 @@
 import fs from 'node:fs/promises';
 import { resolveFromCwd } from './utils.js';
+import { readShopeeToolRows } from './shopeeTool/source.js';
 
-export async function readInputRows(args) {
+export async function readInputRows(args, options = {}) {
+  const shopeeToolRows = await readShopeeToolRows(args, options);
+  if (shopeeToolRows) return shopeeToolRows;
+
   const csvIndex = args.indexOf('--csv');
   const urlIndex = args.indexOf('--url');
 

@@ -1,0 +1,11 @@
+{
+  "sg": [
+    {
+      "id": "1001",
+      "title": "Sample already processed item",
+      "sourceUrl": "https://www.amazon.com/dp/B000000000",
+      "markedAt": "2026-05-16T00:00:00.000Z"
+    }
+  ],
+  "tw": []
+}

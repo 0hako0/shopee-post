@@ -4,5 +4,6 @@ node_modules/
 logs/
 output/
 downloads/
+data/processed-products.json
 playwright-report/
 test-results/

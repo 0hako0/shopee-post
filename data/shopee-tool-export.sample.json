@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "exported_at": "2026-05-16T00:00:00.000Z",
+  "products": [
+    {
+      "id": 1001,
+      "name": "Sample Stainless Steel Water Bottle 500ml",
+      "cost": 12.99,
+      "weight": "2",
+      "category": "Home & Living",
+      "markets": {
+        "sg": {
+          "price": 12.99,
+          "isNew": false
+        }
+      },
+      "supplier_urls": [
+        "https://www.amazon.com/dp/B000000000"
+      ],
+      "last_checked": null
+    }
+  ],
+  "descriptions": {
+    "desc_1001": {
+      "title_en": "Sample Stainless Steel Water Bottle 500ml",
+      "title_zh": "500ml 不锈钢水瓶",
+      "ja": "再利用できるステンレスボトルです。",
+      "en": "Reusable stainless steel bottle for cold drinks. Please review before publishing.",
+      "zh": "适合冷饮的可重复使用不锈钢水瓶。发布前请确认内容。",
+      "brand": "SampleBrand",
+      "material": "Stainless steel",
+      "features": "500ml capacity\nLeak-resistant cap\nWith lid",
+      "spec_fields": {
+        "volume_ml": "500ml",
+        "color": "Silver",
+        "material_detail": "Stainless steel"
+      }
+    }
+  },
+  "fee_settings": {},
+  "target_margin": 20
+}

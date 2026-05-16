@@ -14,8 +14,10 @@
   "listing": {
     "targetLanguage": "en",
     "defaultStock": 10,
-    "priceMarkupPercent": 20,
+    "targetProfitMarginPercent": 20,
+    "platformFeePercent": 0,
     "currency": "SGD"
   },
   "rulesPath": "./config/category-rules.sample.json"
 }
+

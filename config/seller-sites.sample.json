@@ -1,0 +1,38 @@
+[
+  {
+    "region": "sg",
+    "name": "Singapore",
+    "sellerUrl": "https://seller.shopee.sg/portal/product/new",
+    "userDataDir": "./.user-data/shopee-sg"
+  },
+  {
+    "region": "tw",
+    "name": "Taiwan",
+    "sellerUrl": "https://seller.shopee.tw/portal/product/new",
+    "userDataDir": "./.user-data/shopee-tw"
+  },
+  {
+    "region": "my",
+    "name": "Malaysia",
+    "sellerUrl": "https://seller.shopee.com.my/portal/product/new",
+    "userDataDir": "./.user-data/shopee-my"
+  },
+  {
+    "region": "ph",
+    "name": "Philippines",
+    "sellerUrl": "https://seller.shopee.ph/portal/product/new",
+    "userDataDir": "./.user-data/shopee-ph"
+  },
+  {
+    "region": "th",
+    "name": "Thailand",
+    "sellerUrl": "https://seller.shopee.co.th/portal/product/new",
+    "userDataDir": "./.user-data/shopee-th"
+  },
+  {
+    "region": "vn",
+    "name": "Vietnam",
+    "sellerUrl": "https://banhang.shopee.vn/portal/product/new",
+    "userDataDir": "./.user-data/shopee-vn"
+  }
+]

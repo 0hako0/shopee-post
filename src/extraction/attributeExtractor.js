@@ -27,7 +27,9 @@ export function extractAttributes(listing, rules) {
     .filter(([key]) => ['ingredients', 'expiryDate', 'countryOfOrigin'].includes(key))
     .map(([key, value]) => ({ key, value, reason: 'Regulated or compliance-sensitive attribute. Human confirmation required.' }));
 
-  return { auto, missing, needsReview, warnings };
+  const specificationDefaults = buildSpecificationDefaults(listing, rules);
+
+  return { auto, missing, needsReview, warnings, specificationDefaults };
 }
 
 export function mapAttributesToShopeeFields(detectedFields, extracted) {
@@ -77,6 +79,32 @@ function requiredForListing(listing, rules) {
     .filter((rule) => rule.matchKeywords.some((keyword) => haystack.includes(keyword.toLowerCase())))
     .flatMap((rule) => rule.requiredAttributes);
   return Array.from(new Set(matched));
+}
+
+export function applyCategoryDefaults(extracted, categoryText, rules) {
+  const defaults = buildSpecificationDefaultsForText(categoryText, rules);
+  return {
+    ...extracted,
+    specificationDefaults: {
+      ...(extracted.specificationDefaults || {}),
+      ...defaults
+    }
+  };
+}
+
+function buildSpecificationDefaults(listing, rules) {
+  const haystack = `${listing.title} ${listing.description} ${JSON.stringify(listing.specifications)}`.toLowerCase();
+  return buildSpecificationDefaultsForText(haystack, rules);
+}
+
+function buildSpecificationDefaultsForText(text, rules) {
+  const haystack = String(text || '').toLowerCase();
+  const defaults = {};
+  for (const rule of rules.specificationDefaults || []) {
+    const matched = (rule.matchCategoryKeywords || []).some((keyword) => haystack.includes(keyword.toLowerCase()));
+    if (matched) Object.assign(defaults, rule.defaults || {});
+  }
+  return defaults;
 }
 
 function guessAttributeKey(label = '') {

@@ -5,7 +5,8 @@ import { resolveFromCwd, toNumber } from './utils.js';
 dotenv.config();
 
 export async function loadConfig() {
-  const defaults = JSON.parse(await fs.readFile(resolveFromCwd('./config/default.json'), 'utf8'));
+  const defaultsText = await fs.readFile(resolveFromCwd('./config/default.json'), 'utf8');
+  const defaults = JSON.parse(defaultsText.replace(/^\uFEFF/, ''));
   return {
     ...defaults,
     shopee: {
@@ -24,6 +25,11 @@ export async function loadConfig() {
       ...defaults.listing,
       targetLanguage: process.env.TARGET_LANGUAGE || defaults.listing.targetLanguage,
       defaultStock: toNumber(process.env.DEFAULT_STOCK, defaults.listing.defaultStock),
+      targetProfitMarginPercent: toNumber(
+        process.env.TARGET_PROFIT_MARGIN_PERCENT,
+        defaults.listing.targetProfitMarginPercent
+      ),
+      platformFeePercent: toNumber(process.env.PLATFORM_FEE_PERCENT, defaults.listing.platformFeePercent),
       priceMarkupPercent: toNumber(process.env.PRICE_MARKUP_PERCENT, defaults.listing.priceMarkupPercent)
     },
     browser: {
@@ -37,3 +43,5 @@ function boolEnv(name, fallback) {
   if (process.env[name] === undefined) return fallback;
   return ['1', 'true', 'yes', 'on'].includes(process.env[name].toLowerCase());
 }
+
+

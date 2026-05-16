@@ -6,8 +6,10 @@
   "description": "MVP browser automation tool for preparing Shopee Seller Centre draft listings from Amazon product URLs with human review gates.",
   "scripts": {
     "start": "node src/main.js",
-    "check": "node --check src/main.js && node --check src/shopee/automation.js && node --check src/amazon/productSource.js",
-    "install:browsers": "playwright install chromium"
+    "check": "node --check src/main.js && node --check src/shopee/automation.js && node --check src/amazon/productSource.js && node --check src/shopeeTool/convertExport.js && node --check src/shopeeTool/source.js && node --check src/processedProducts.js",
+    "install:browsers": "playwright install chromium",
+    "open:sellers": "node src/openSellerSites.js",
+    "convert:shopee-tool": "node src/shopeeTool/convertExport.js"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
@@ -15,3 +17,4 @@
   },
   "devDependencies": {}
 }
+

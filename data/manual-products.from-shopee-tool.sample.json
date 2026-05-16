@@ -1,0 +1,36 @@
+[
+  {
+    "url": "https://www.amazon.com/dp/B000000000",
+    "title": "Sample Stainless Steel Water Bottle 500ml",
+    "price": 12.99,
+    "currency": "SOURCE",
+    "brand": "SampleBrand",
+    "model": "",
+    "description": "Reusable stainless steel bottle for cold drinks. Please review before publishing.",
+    "bullets": [
+      "500ml capacity",
+      "Leak-resistant cap",
+      "With lid"
+    ],
+    "images": [],
+    "specifications": {
+      "Brand": "SampleBrand",
+      "Material": "Stainless steel",
+      "Features": "500ml capacity Leak-resistant cap With lid",
+      "Shopee Tool Category": "Home & Living",
+      "Item Weight": "0.4kg",
+      "Volume Capacity": "500ml",
+      "Color": "Silver"
+    },
+    "shopeeTool": {
+      "id": 1001,
+      "name": "Sample Stainless Steel Water Bottle 500ml",
+      "category": "Home & Living",
+      "market": "sg",
+      "sourcePrice": 12.99,
+      "supplierUrls": [
+        "https://www.amazon.com/dp/B000000000"
+      ]
+    }
+  }
+]

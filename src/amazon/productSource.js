@@ -5,6 +5,10 @@ import { resolveFromCwd, sleep, toNumber } from '../utils.js';
 export async function fetchProduct(row, config, logger) {
   if (!row.amazonUrl) throw new Error('Missing amazonUrl');
 
+  if (row.productFromTool) {
+    return fetchFromShopeeTool(row, config, logger);
+  }
+
   if (config.amazon.source === 'manual-json') {
     return fetchFromManualJson(row.amazonUrl, config);
   }
@@ -14,6 +18,40 @@ export async function fetchProduct(row, config, logger) {
   }
 
   return fetchWithPlaywright(row.amazonUrl, config, logger);
+}
+
+async function fetchFromShopeeTool(row, config, logger) {
+  const product = normalizeProduct(row.productFromTool);
+  if (!/^https?:\/\//i.test(row.amazonUrl)) return product;
+
+  try {
+    const amazonProduct = await fetchWithPlaywright(row.amazonUrl, config, logger);
+    const amazonCost = toNumber(amazonProduct.price, 0);
+    const sourcePrice = toNumber(product.shopeeTool?.sourcePrice, product.price || 0);
+    if (amazonCost > 0) {
+      await logger.info('Fetched Amazon source price for Shopee tool product.', {
+        amazonUrl: row.amazonUrl,
+        amazonCost,
+        currentShopeeToolPrice: sourcePrice
+      });
+    }
+    return normalizeProduct({
+      ...product,
+      amazonCost: amazonCost || product.amazonCost,
+      price: amazonCost || product.price,
+      images: amazonProduct.images || [],
+      specifications: {
+        ...amazonProduct.specifications,
+        ...product.specifications
+      }
+    });
+  } catch (error) {
+    await logger.warn('Could not fetch Amazon images for Shopee tool product. Continuing with text data only.', {
+      amazonUrl: row.amazonUrl,
+      error: error.message
+    });
+    return product;
+  }
 }
 
 async function fetchFromManualJson(url, config) {
@@ -46,11 +84,24 @@ async function fetchWithPlaywright(url, config, logger) {
         .map((node) => node.textContent.trim())
         .filter(Boolean);
       const description = text('#productDescription') || bullets.join('\n');
-      const mainImage = attr('#landingImage', 'src') || attr('#imgBlkFront', 'src');
+      const landingImage = document.querySelector('#landingImage, #imgBlkFront');
+      let dynamicImages = [];
+      try {
+        dynamicImages = Object.keys(JSON.parse(landingImage?.getAttribute('data-a-dynamic-image') || '{}'));
+      } catch {
+        dynamicImages = [];
+      }
+      const mainImage = attr('#landingImage', 'src')
+        || attr('#imgBlkFront', 'src')
+        || attr('meta[property="og:image"]', 'content')
+        || attr('link[rel="image_src"]', 'href');
       const images = Array.from(new Set([
         mainImage,
+        ...dynamicImages,
         ...Array.from(document.querySelectorAll('#altImages img')).map((img) => img.src)
-      ].filter(Boolean).filter((src) => !src.includes('transparent-pixel'))));
+      ].filter(Boolean)
+        .map((src) => src.replace(/\._[A-Z0-9_,]+_\./i, '.'))
+        .filter((src) => !src.includes('transparent-pixel'))));
       const specifications = {};
       for (const row of document.querySelectorAll('#productDetails_techSpec_section_1 tr, #productDetails_detailBullets_sections1 tr, table.a-keyvalue tr')) {
         const key = row.querySelector('th, .a-text-bold')?.textContent?.replace(/\s+/g, ' ').trim();
