@@ -1,0 +1,19 @@
+[
+  {
+    "url": "https://www.amazon.com/dp/B000000000",
+    "title": "Sample Stainless Steel Water Bottle 500ml",
+    "price": 12.99,
+    "currency": "USD",
+    "brand": "SampleBrand",
+    "model": "SB-500",
+    "description": "Reusable stainless steel bottle for cold drinks. Please rewrite before publishing.",
+    "bullets": ["500ml capacity", "Stainless steel body", "Leak-resistant cap"],
+    "images": ["https://example.com/sample-bottle.jpg"],
+    "specifications": {
+      "Material": "Stainless steel",
+      "Capacity": "500ml",
+      "Item Weight": "280g",
+      "Color": "Silver"
+    }
+  }
+]
