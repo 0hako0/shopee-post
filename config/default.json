@@ -1,0 +1,21 @@
+{
+  "shopee": {
+    "region": "sg",
+    "sellerUrl": "https://seller.shopee.sg/portal/product/new",
+    "userDataDir": "./.user-data/shopee",
+    "uploadImages": true,
+    "maxImages": 3
+  },
+  "amazon": {
+    "source": "manual-json",
+    "manualJsonPath": "./data/manual-products.sample.json",
+    "slowDownMs": 2500
+  },
+  "listing": {
+    "targetLanguage": "en",
+    "defaultStock": 10,
+    "priceMarkupPercent": 20,
+    "currency": "SGD"
+  },
+  "rulesPath": "./config/category-rules.sample.json"
+}
