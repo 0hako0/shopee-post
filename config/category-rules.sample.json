@@ -1,0 +1,46 @@
+{
+  "restrictedKeywords": [
+    {
+      "name": "Food and supplements",
+      "keywords": ["food", "supplement", "vitamin", "snack", "tea", "coffee", "健康食品", "サプリ", "食品"],
+      "warning": "食品・サプリは成分、賞味期限、輸入規制、表示義務を確認してください。"
+    },
+    {
+      "name": "Cosmetics",
+      "keywords": ["cosmetic", "skin care", "lotion", "cream", "化粧品", "美容液"],
+      "warning": "化粧品は成分、効能表現、輸入・販売許可を確認してください。"
+    },
+    {
+      "name": "Medicine",
+      "keywords": ["medicine", "drug", "pharmaceutical", "医薬品", "薬"],
+      "warning": "医薬品カテゴリは自動出品対象外にすることを推奨します。法規制を確認してください。"
+    },
+    {
+      "name": "Electronics",
+      "keywords": ["battery", "charger", "adapter", "電池", "充電器", "家電"],
+      "warning": "電化製品は認証、電圧、プラグ形状、電池輸送規制を確認してください。"
+    }
+  ],
+  "attributeSynonyms": {
+    "brand": ["brand", "メーカー", "ブランド"],
+    "model": ["model", "model number", "型番", "品番"],
+    "material": ["material", "素材", "材質"],
+    "ingredients": ["ingredients", "成分", "原材料"],
+    "size": ["size", "dimensions", "サイズ", "寸法"],
+    "weight": ["weight", "item weight", "重量"],
+    "color": ["color", "colour", "カラー", "色"],
+    "countryOfOrigin": ["country of origin", "origin", "原産国"],
+    "expiryDate": ["expiry", "expiration", "賞味期限", "使用期限"],
+    "capacity": ["capacity", "volume", "容量"]
+  },
+  "categoryRules": [
+    {
+      "matchKeywords": ["cosmetic", "skin care", "化粧品"],
+      "requiredAttributes": ["brand", "ingredients", "countryOfOrigin", "expiryDate"]
+    },
+    {
+      "matchKeywords": ["electronics", "battery", "charger", "家電"],
+      "requiredAttributes": ["brand", "model", "weight"]
+    }
+  ]
+}
