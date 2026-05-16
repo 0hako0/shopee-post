@@ -1,0 +1,17 @@
+{
+  "name": "shopee-amazon-listing-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MVP browser automation tool for preparing Shopee Seller Centre draft listings from Amazon product URLs with human review gates.",
+  "scripts": {
+    "start": "node src/main.js",
+    "check": "node --check src/main.js && node --check src/shopee/automation.js && node --check src/amazon/productSource.js",
+    "install:browsers": "playwright install chromium"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "playwright": "^1.45.0"
+  },
+  "devDependencies": {}
+}
